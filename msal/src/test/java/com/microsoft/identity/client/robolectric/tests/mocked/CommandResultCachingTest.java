@@ -45,6 +45,7 @@ import com.microsoft.identity.client.robolectric.utils.RoboTestUtils;
 import com.microsoft.identity.common.exception.ClientException;
 import com.microsoft.identity.common.internal.cache.ICacheRecord;
 import com.microsoft.identity.common.internal.controllers.CommandDispatcher;
+import com.microsoft.identity.common.internal.controllers.CommandDispatcherHelper;
 import com.microsoft.identity.common.internal.providers.oauth2.TokenResponse;
 import com.microsoft.identity.internal.testutils.MockTokenResponse;
 
@@ -70,7 +71,7 @@ public final class CommandResultCachingTest {
 
     @Before
     public void before(){
-        CommandDispatcher.clearCommandCache();
+        CommandDispatcherHelper.clear();
     }
 
     /**
