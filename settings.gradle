@@ -1,5 +1,4 @@
-include ':msal', ':common'
-project(':common').projectDir = new File('common/common')
+include ':msal'
 
 // test apps
 include ':testapps:sample'

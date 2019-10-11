@@ -121,7 +121,7 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:$rootProject.ext.rulesVersion"
     androidTestImplementation "org.mockito:mockito-android:$rootProject.ext.mockitoAndroidVersion"
     // 'local' flavor dependencies
-    localApi(project(":common")) {
+    localApi("com.github.nll:microsoft-authentication-library-common-for-android:1.0.7-NoAndroidX") {
         transitive = false
     }
 
