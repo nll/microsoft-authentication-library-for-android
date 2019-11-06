@@ -79,6 +79,8 @@ public class PublicClientApplicationConfiguration {
 
     private static final String BROKER_REDIRECT_URI_SCHEME_AND_SEPARATOR = "msauth://";
 
+    private static final boolean EnforceAppSignature = false;
+
     public static final class SerializedNames {
         static final String CLIENT_ID = "client_id";
         static final String REDIRECT_URI = "redirect_uri";
@@ -511,10 +513,16 @@ public class PublicClientApplicationConfiguration {
             Logger.error(TAG, "Unexpected error in verifyRedirectUriWithAppSignature()", e);
         }
 
-        throw new MsalClientException(
-                MsalClientException.REDIRECT_URI_VALIDATION_ERROR,
-                "The redirect URI in the configuration file doesn't match with the one " +
-                        "generated with package name and signature hash. Please verify the uri in the config file and your app registration in Azure portal.");
+        final String errorMessage =  "The redirect URI in the configuration file doesn't match with the one " +
+                "generated with package name and signature hash. Please verify the uri in the config file and your app registration in Azure portal.";
+
+        if (EnforceAppSignature) {
+            throw new MsalClientException(
+                    MsalClientException.REDIRECT_URI_VALIDATION_ERROR, errorMessage);
+        } else {
+            // to allow more flexibility
+            Logger.warn(TAG, errorMessage);
+        }
     }
 
     @SuppressWarnings("PMD")
