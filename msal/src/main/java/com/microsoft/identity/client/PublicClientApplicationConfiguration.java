@@ -23,7 +23,6 @@
 package com.microsoft.identity.client;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -423,17 +422,11 @@ public class PublicClientApplicationConfiguration {
             Logger.error(TAG, "Unexpected error in verifyRedirectUriWithAppSignature()", e);
         }
 
-        final boolean isDebuggable =  ( 0 != ( mAppContext.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE ) );
-
         final String errorMessage = "The redirect URI in the configuration file doesn't match with the one " +
                 "generated with package name and signature hash. Please verify the uri in the config file and your app registration in Azure portal.";
 
-        // to allow more flexibility when running in debug mode locally
-        if (isDebuggable) {
-            Logger.warn(TAG, errorMessage);
-        } else {
-            throw new IllegalStateException(errorMessage);
-        }
+        // to allow more flexibility changed to a warning
+        Logger.warn(TAG, errorMessage);
     }
 
     @SuppressWarnings("PMD")
